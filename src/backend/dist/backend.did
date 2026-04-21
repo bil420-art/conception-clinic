@@ -1,0 +1,192 @@
+type UserProfilePublic = 
+ record {
+   age: opt nat;
+   createdAt: Timestamp;
+   displayName: text;
+   healthHistoryConsent: bool;
+   id: UserId;
+   planningTimeline: opt PlanningTimeline;
+   updatedAt: Timestamp;
+ };
+type UserId = principal;
+type UpdateProfileRequest = 
+ record {
+   age: opt nat;
+   displayName: text;
+   healthHistoryConsent: bool;
+   planningTimeline: opt PlanningTimeline;
+ };
+type UpdateBlogPostRequest = 
+ record {
+   content: text;
+   excerpt: text;
+   featuredImageUrl: opt text;
+   id: nat;
+   status: BlogPostStatus;
+   title: text;
+ };
+type Timestamp = int;
+type SubmitAssessmentRequest = record {answers: vec Answer;};
+type SlotId = nat;
+type RiskProfile = 
+ record {
+   completedAt: Timestamp;
+   overallRisk: RiskLevel;
+   recommendations: vec Recommendation;
+ };
+type RiskLevel = 
+ variant {
+   areasToImprove;
+   consultSpecialist;
+   optimized;
+ };
+type Recommendation = 
+ record {
+   category: text;
+   description: text;
+   title: text;
+ };
+type QuestionId = nat;
+type PlanningTimeline = 
+ variant {
+   moreThan1Year;
+   notSure;
+   within1Year;
+   within3Months;
+   within6Months;
+ };
+type CreateBlogPostRequest = 
+ record {
+   content: text;
+   excerpt: text;
+   featuredImageUrl: opt text;
+   status: BlogPostStatus;
+   title: text;
+ };
+type CreateArticleRequest = 
+ record {
+   category: ArticleCategory;
+   citations: vec Citation;
+   content: text;
+   title: text;
+ };
+type ConsultationSlot = 
+ record {
+   durationMinutes: nat;
+   id: SlotId;
+   isAvailable: bool;
+   startTime: Timestamp;
+ };
+type Citation = 
+ record {
+   authors: text;
+   source: text;
+   title: text;
+   year: nat;
+ };
+type BookAppointmentRequest = 
+ record {
+   email: text;
+   name: text;
+   phone: text;
+   reasonForVisit: text;
+   slotId: SlotId;
+ };
+type BlogPostStatus = 
+ variant {
+   draft;
+   published;
+ };
+type BlogPostPublic = 
+ record {
+   content: text;
+   createdAt: Timestamp;
+   excerpt: text;
+   featuredImageUrl: opt text;
+   id: nat;
+   status: BlogPostStatus;
+   title: text;
+   updatedAt: Timestamp;
+ };
+type AssessmentId = nat;
+type Assessment = 
+ record {
+   answers: vec Answer;
+   createdAt: Timestamp;
+   id: AssessmentId;
+   riskProfile: RiskProfile;
+   userId: UserId;
+ };
+type ArticlePublic = 
+ record {
+   category: ArticleCategory;
+   citations: vec Citation;
+   content: text;
+   id: ArticleId;
+   publishedAt: Timestamp;
+   title: text;
+   updatedAt: Timestamp;
+ };
+type ArticleId = nat;
+type ArticleCategory = 
+ variant {
+   general;
+   lifestyle;
+   nutrition;
+   reproductiveTesting;
+   sexualHealth;
+   stress;
+ };
+type AppointmentStatus = 
+ variant {
+   cancelled;
+   confirmed;
+   pending;
+ };
+type AppointmentId = nat;
+type Appointment = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   id: AppointmentId;
+   name: text;
+   phone: text;
+   reasonForVisit: text;
+   slotId: SlotId;
+   slotStartTime: Timestamp;
+   status: AppointmentStatus;
+   userId: UserId;
+ };
+type AnswerValue = 
+ variant {
+   "bool": bool;
+   "nat": nat;
+   "text": text;
+ };
+type Answer = 
+ record {
+   questionId: QuestionId;
+   value: AnswerValue;
+ };
+service : {
+  bookAppointment: (req: BookAppointmentRequest) -> (Appointment);
+  canRetakeAssessment: () -> (bool) query;
+  cancelAppointment: (appointmentId: AppointmentId) -> (bool);
+  createArticle: (req: CreateArticleRequest) -> (ArticlePublic);
+  createBlogPost: (req: CreateBlogPostRequest) -> (BlogPostPublic);
+  deleteBlogPost: (postId: nat) -> (bool);
+  getArticle: (articleId: ArticleId) -> (opt ArticlePublic) query;
+  getBlogPost: (postId: nat) -> (opt BlogPostPublic) query;
+  getMyAppointments: () -> (vec Appointment) query;
+  getMyLatestAssessment: () -> (opt Assessment) query;
+  getMyProfile: () -> (opt UserProfilePublic) query;
+  listAllBlogPosts: () -> (vec BlogPostPublic) query;
+  listArticles: () -> (vec ArticlePublic) query;
+  listArticlesByCategory: (category: ArticleCategory) ->
+   (vec ArticlePublic) query;
+  listAvailableSlots: () -> (vec ConsultationSlot) query;
+  listPublishedBlogPosts: () -> (vec BlogPostPublic) query;
+  submitAssessment: (req: SubmitAssessmentRequest) -> (Assessment);
+  updateBlogPost: (req: UpdateBlogPostRequest) -> (opt BlogPostPublic);
+  upsertMyProfile: (req: UpdateProfileRequest) -> (UserProfilePublic);
+}

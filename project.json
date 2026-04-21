@@ -1,0 +1,21 @@
+{
+  "overview": "Conception Clinic is a reproductive health and fertility guidance platform offering evidence-informed preconception care and family planning support. It combines an educational content library, a personalized self-assessment questionnaire with risk profiling, consultation booking, and authenticated user dashboards for individuals and couples planning pregnancy.",
+  "features": [
+    "User registration and login with protected dashboard",
+    "Educational article library on nutrition, lifestyle, reproductive testing and more",
+    "Multi-step fertility assessment with personalized risk profile and recommendations",
+    "Consultation booking with appointment management",
+    "Responsive layout for mobile and desktop",
+    "User profile to save assessment history and preferences"
+  ],
+  "category": "health",
+  "tags": [
+    "fertility",
+    "reproductive-health",
+    "preconception",
+    "family-planning",
+    "health-platform",
+    "consultation-booking"
+  ],
+  "last_updated": "2026-04-20T15:21:11.737Z"
+}

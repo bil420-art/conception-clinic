@@ -1,0 +1,140 @@
+// Version: 1.0.0
+type AnswerValue__145245395 = {#bool_ : Bool; #nat_ : Nat; #text_ : Text};
+type Answer__499776299 =
+  {questionId : QuestionId__439540289; value : AnswerValue__145245395};
+type AppointmentId__729317175 = Nat;
+type AppointmentStatus__931188166 = {#cancelled; #confirmed; #pending};
+type Appointment__372320418 =
+  {
+    createdAt : Timestamp__301639476;
+    email : Text;
+    id : AppointmentId__729317175;
+    name : Text;
+    phone : Text;
+    reasonForVisit : Text;
+    slotId : SlotId__269479876;
+    slotStartTime : Timestamp__301639476;
+    status : AppointmentStatus__931188166;
+    userId : UserId__158757552
+  };
+type ArticleCategory__120610314 =
+  {
+    #general;
+    #lifestyle;
+    #nutrition;
+    #reproductiveTesting;
+    #sexualHealth;
+    #stress
+  };
+type ArticleId__678690314 = Nat;
+type Article__129739089 =
+  {
+    category : ArticleCategory__120610314;
+    citations : [Citation__135420027];
+    content : Text;
+    id : ArticleId__678690314;
+    publishedAt : Timestamp__301639476;
+    title : Text;
+    var updatedAt : Timestamp__301639476
+  };
+type AssessmentId__1041727417 = Nat;
+type Assessment__596753465 =
+  {
+    answers : [Answer__499776299];
+    createdAt : Timestamp__301639476;
+    id : AssessmentId__1041727417;
+    riskProfile : RiskProfile__960821387;
+    userId : UserId__158757552
+  };
+type BlogPostStatus__619367387 = {#draft; #published};
+type BlogPost__72627970 =
+  {
+    var content : Text;
+    createdAt : Timestamp__301639476;
+    var excerpt : Text;
+    var featuredImageUrl : ?Text;
+    id : Nat;
+    var status : BlogPostStatus__619367387;
+    var title : Text;
+    var updatedAt : Timestamp__301639476
+  };
+type Citation__135420027 =
+  {authors : Text; source : Text; title : Text; year : Nat};
+type ConsultationSlot__436580338 =
+  {
+    durationMinutes : Nat;
+    id : SlotId__269479876;
+    isAvailable : Bool;
+    startTime : Timestamp__301639476
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type PlanningTimeline__493107980 =
+  {#moreThan1Year; #notSure; #within1Year; #within3Months; #within6Months};
+type QuestionId__439540289 = Nat;
+type Recommendation__979096127 =
+  {category : Text; description : Text; title : Text};
+type RiskLevel__729400197 = {#areasToImprove; #consultSpecialist; #optimized};
+type RiskProfile__960821387 =
+  {
+    completedAt : Timestamp__301639476;
+    overallRisk : RiskLevel__729400197;
+    recommendations : [Recommendation__979096127]
+  };
+type SlotId__269479876 = Nat;
+type Timestamp__301639476 = Int;
+type UserId__158757552 = Principal;
+type UserProfile__446616884 =
+  {
+    var age : ?Nat;
+    createdAt : Timestamp__301639476;
+    var displayName : Text;
+    var healthHistoryConsent : Bool;
+    id : UserId__158757552;
+    var planningTimeline : ?PlanningTimeline__493107980;
+    var updatedAt : Timestamp__301639476
+  };
+actor {
+  stable appointments :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Appointment__372320418]];
+      var elementIndex : Nat__490723111
+    };
+  stable articles :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Article__129739089]];
+      var elementIndex : Nat__490723111
+    };
+  stable var articlesSeeded : Bool;
+  stable assessments :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Assessment__596753465]];
+      var elementIndex : Nat__490723111
+    };
+  stable blogPosts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?BlogPost__72627970]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextAppointmentId : {var value : Nat};
+  stable nextArticleId : {var value : Nat};
+  stable nextAssessmentId : {var value : Nat};
+  stable nextBlogPostId : {var value : Nat};
+  stable profiles :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?UserProfile__446616884]];
+      var elementIndex : Nat__490723111
+    };
+  stable slots :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ConsultationSlot__436580338]];
+      var elementIndex : Nat__490723111
+    };
+  stable var slotsSeeded : Bool
+};

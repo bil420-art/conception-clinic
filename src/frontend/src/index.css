@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Lora";
+    --font-body: "Inter";
+    --font-mono: monospace;
+    --radius: 0.75rem;
+
+    --background: 0.98 0.01 250;
+    --foreground: 0.18 0.02 250;
+    --card: 1.0 0 0;
+    --card-foreground: 0.18 0.02 250;
+    --popover: 1.0 0 0;
+    --popover-foreground: 0.18 0.02 250;
+
+    --primary: 0.45 0.12 185;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.68 0.08 160;
+    --secondary-foreground: 0.98 0 0;
+    --muted: 0.92 0.01 250;
+    --muted-foreground: 0.45 0.02 250;
+
+    --accent: 0.52 0.14 165;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.58 0.2 22;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.91 0.02 250;
+    --input: 0.96 0.01 250;
+    --ring: 0.45 0.12 185;
+
+    --chart-1: 0.52 0.14 165;
+    --chart-2: 0.68 0.08 160;
+    --chart-3: 0.58 0.2 22;
+    --chart-4: 0.45 0.12 185;
+    --chart-5: 0.72 0.06 200;
+
+    --sidebar: 0.98 0.01 250;
+    --sidebar-foreground: 0.18 0.02 250;
+    --sidebar-primary: 0.45 0.12 185;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.68 0.08 160;
+    --sidebar-accent-foreground: 0.98 0 0;
+    --sidebar-border: 0.91 0.02 250;
+    --sidebar-ring: 0.45 0.12 185;
+  }
+
+  .dark {
+    --background: 0.13 0.01 250;
+    --foreground: 0.92 0.01 250;
+    --card: 0.17 0.01 250;
+    --card-foreground: 0.92 0.01 250;
+    --popover: 0.22 0.01 250;
+    --popover-foreground: 0.92 0.01 250;
+
+    --primary: 0.65 0.1 185;
+    --primary-foreground: 0.13 0.01 250;
+
+    --secondary: 0.45 0.08 160;
+    --secondary-foreground: 0.92 0.01 250;
+    --muted: 0.22 0.01 250;
+    --muted-foreground: 0.58 0.01 250;
+
+    --accent: 0.65 0.1 165;
+    --accent-foreground: 0.13 0.01 250;
+
+    --destructive: 0.65 0.18 22;
+    --destructive-foreground: 0.13 0.01 250;
+
+    --border: 0.27 0.01 250;
+    --input: 0.27 0.01 250;
+    --ring: 0.65 0.1 185;
+
+    --chart-1: 0.65 0.1 165;
+    --chart-2: 0.58 0.08 160;
+    --chart-3: 0.52 0.18 22;
+    --chart-4: 0.48 0.12 185;
+    --chart-5: 0.62 0.06 200;
+
+    --sidebar: 0.17 0.01 250;
+    --sidebar-foreground: 0.92 0.01 250;
+    --sidebar-primary: 0.65 0.1 185;
+    --sidebar-primary-foreground: 0.13 0.01 250;
+    --sidebar-accent: 0.45 0.08 160;
+    --sidebar-accent-foreground: 0.92 0.01 250;
+    --sidebar-border: 0.27 0.01 250;
+    --sidebar-ring: 0.65 0.1 185;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url("/assets/fonts/Lora.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .shadow-clinical {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 3px 10px rgba(0, 0, 0, 0.06);
+  }
+}
